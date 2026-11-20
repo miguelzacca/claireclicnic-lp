@@ -1,0 +1,14 @@
+{
+  "track": ".hero",
+  "stage": ".film-stage",
+  "heading": ".hero-title",
+  "cta": ".hero-actions .button",
+  "destination": "https://wa.me/5547933883550",
+  "next": "#especialidades",
+  "marks": [
+    {"id":"00-abertura","position":0,"metrics":[{"selector":".hero:not(.film-intro) .hero-copy","property":"opacity","min":0.99},{"selector":".scene-choices","property":"opacity","max":0.01}]},
+    {"id":"35-dobra","position":0.35,"metrics":[{"selector":".film-stage","property":"--scene-angle","min":60,"max":78},{"selector":".scene-ink","property":"opacity","min":0.6,"max":0.85}]},
+    {"id":"70-escolha","position":0.70,"metrics":[{"selector":".scene-choice-title","property":"opacity","min":0.99},{"selector":".film-stage","property":"--scene-angle","max":0.1}]},
+    {"id":"100-saida","position":1,"metrics":[{"selector":".film-stage","property":"--landing-travel","max":1},{"selector":".scene-choices","property":"opacity","min":0.99}]}
+  ]
+}
