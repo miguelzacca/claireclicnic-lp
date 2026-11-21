@@ -1,3 +1,5 @@
+import { prepareMovie } from "./video.js";
+
 const clamp = (value) => Math.max(0, Math.min(1, value));
 const firstFrameAt = .12;
 const lastFrameAt = .79;
@@ -10,68 +12,7 @@ function segment(progress, start, end) {
   return t * t * (3 - 2 * t);
 }
 
-function prepareMovie(video, track) {
-  let source = "";
-  let progress = 0;
-  let seekTimeout;
-  let broken = false;
-
-  function fail() {
-    if (!source || !video.hasAttribute("src")) return;
-    clearTimeout(seekTimeout);
-    broken = true;
-    track.classList.remove("has-movie");
-    video.removeAttribute("src");
-    video.load();
-  }
-
-  function seek() {
-    if (!source || broken || video.seeking || !video.seekable.length || !Number.isFinite(video.duration)) return;
-
-    const lastFrame = Math.max(0, Math.round(video.duration * frameRate) - 1);
-    const wantedFrame = Math.round(progress * lastFrame);
-    const time = wantedFrame === 0 ? 0 : (wantedFrame + .06) / frameRate;
-    if (Math.abs(video.currentTime - time) >= .5 / frameRate) {
-      clearTimeout(seekTimeout);
-      seekTimeout = setTimeout(fail, 2800);
-      video.currentTime = time;
-    } else if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-      track.classList.add("has-movie");
-    }
-  }
-
-  video.addEventListener("loadeddata", seek);
-  video.addEventListener("progress", seek);
-  video.addEventListener("seeked", () => {
-    clearTimeout(seekTimeout);
-    seek();
-  });
-  video.addEventListener("error", fail);
-
-  return {
-    setSource(nextSource) {
-      if (nextSource === source) return;
-      clearTimeout(seekTimeout);
-      source = nextSource;
-      broken = false;
-      track.classList.remove("has-movie");
-      video.preload = source ? "auto" : "none";
-      if (source) {
-        video.src = source;
-      } else if (video.hasAttribute("src")) {
-        video.removeAttribute("src");
-        video.load();
-      }
-    },
-    render(nextProgress) {
-      if (nextProgress === progress) return;
-      progress = nextProgress;
-      seek();
-    },
-  };
-}
-
-export function mountFilm(track) {
+export function mountFilm(track, renderContactFilm) {
   const stage = track.querySelector(".film-stage");
   const video = stage.querySelector(".scene-movie video");
   const deck = stage.querySelector(".scene-choices");
@@ -81,7 +22,7 @@ export function mountFilm(track) {
   const motion = matchMedia("(prefers-reduced-motion: no-preference) and (min-height: 31.5rem)");
   const wheel = matchMedia("(prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine)");
   const narrow = matchMedia("(max-width: 47rem)");
-  const movie = prepareMovie(video, track);
+  const movie = prepareMovie(video, frameRate, (ready) => track.classList.toggle("has-movie", ready));
   let directed = false;
   let smoother;
   let introShown = false;
@@ -154,9 +95,9 @@ export function mountFilm(track) {
   function draw(time) {
     frame = 0;
     smoother?.raf(time);
+    const position = scrollY;
 
     if (directed) {
-      const position = scrollY;
       const progress = clamp((position - origin) / range);
       if (previous !== progress) {
         previous = progress;
@@ -164,6 +105,7 @@ export function mountFilm(track) {
         syncMovie(progress, position);
       }
     }
+    renderContactFilm?.(position);
     if (smoother) schedule();
   }
 

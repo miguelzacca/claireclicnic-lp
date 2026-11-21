@@ -621,3 +621,228 @@
     font-size: .76rem;
   }
 }
+
+.contact-story {
+  --contact-runway: clamp(31rem, 83svh, 54rem);
+  --contact-stage-height: calc(100svh - var(--header-height));
+}
+
+.contact-story.has-contact-film {
+  min-block-size: calc(var(--contact-stage-height) + var(--contact-runway));
+  background: var(--paper);
+}
+
+.has-contact-film .contact-stage {
+  --contact-camera-inset: 0 -3% 0 9%;
+  --contact-camera-origin: 52% 56%;
+  position: sticky;
+  inset-block-start: var(--header-height);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-block-size: var(--contact-stage-height);
+  isolation: isolate;
+  overflow: clip;
+  background: var(--night);
+}
+
+.has-contact-film .contact-stage > :is(.team, .visit) {
+  grid-area: 1 / 1;
+  display: grid;
+  align-content: center;
+  padding-block: clamp(1.65rem, 5svh, 4.25rem);
+}
+
+.has-contact-film .team {
+  z-index: 1;
+  background: transparent;
+}
+
+.has-contact-film .team-inner {
+  display: block;
+}
+
+.has-contact-film .team-media {
+  display: none;
+}
+
+.has-contact-film .team-copy {
+  inline-size: min(47%, 35rem);
+  opacity: var(--contact-team-alpha, 1);
+  transform: translateY(var(--contact-team-y, 0));
+}
+
+.has-contact-film .team-copy .section-title,
+.has-contact-film .visit-copy .section-title {
+  font-size: clamp(3.8rem, 7.45vw, 7.5rem);
+}
+
+.contact-film {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #26151a;
+  background: color-mix(in srgb, #26151a, var(--paper) var(--contact-daylight, 0%));
+}
+
+.contact-film-camera {
+  position: absolute;
+  inset: var(--contact-camera-inset);
+  transform: scale(var(--contact-dolly, 1));
+  transform-origin: var(--contact-camera-origin);
+  mask-image: linear-gradient(90deg, transparent, #000 26%);
+}
+
+.contact-film-camera :is(img, video) {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.contact-film-impact {
+  opacity: var(--contact-film-impact, 0);
+}
+
+.contact-film-ending {
+  opacity: var(--contact-film-ending, 0);
+}
+
+.contact-film video {
+  opacity: 0;
+}
+
+.contact-film.has-movie video {
+  opacity: var(--contact-footage-alpha, 0);
+}
+
+.contact-film::after {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #26151a 13%, #26151afa 24%, #26151ab8 39%, #26151a22 58%, transparent 71%),
+    linear-gradient(0deg, #26151a6b, transparent 30%);
+  opacity: var(--contact-shade-alpha, 1);
+  content: "";
+}
+
+.has-contact-film .visit {
+  z-index: 2;
+  background: transparent;
+}
+
+.has-contact-film .visit::before {
+  content: none;
+}
+
+.has-contact-film .visit-inner {
+  opacity: var(--contact-visit-alpha, 0);
+  transform: translateY(var(--contact-visit-y, 1rem));
+}
+
+.has-contact-film .visit-address {
+  background: #f9efe3e6;
+}
+
+@media (max-width: 47rem) {
+  .contact-story {
+    --contact-runway: clamp(24rem, 68svh, 36rem);
+  }
+
+  .has-contact-film .contact-stage {
+    --contact-camera-inset: 8% 0 -8%;
+  }
+
+  .has-contact-film .contact-stage > .team {
+    align-content: start;
+    padding-block-start: clamp(3rem, 9.5svh, 6rem);
+  }
+
+  .has-contact-film .team-copy {
+    inline-size: 100%;
+    max-inline-size: 31rem;
+  }
+
+  .has-contact-film .team-copy .section-title,
+  .has-contact-film .visit-copy .section-title {
+    font-size: clamp(2.8rem, 12vw, 4.6rem);
+  }
+
+  .has-contact-film .team-list {
+    margin-block-end: .45rem;
+  }
+
+  .has-contact-film .team-list > div {
+    padding-block: .62rem;
+  }
+
+  .has-contact-film .visit-inner {
+    gap: clamp(.8rem, 3svh, 1.65rem);
+  }
+
+  .has-contact-film .visit-address {
+    gap: .45rem;
+    padding: clamp(.85rem, 3.6vw, 1.55rem);
+  }
+
+  .has-contact-film .visit-row {
+    padding-block-start: .38rem;
+  }
+
+  .has-contact-film .visit-address .care-title {
+    font-size: clamp(2.1rem, 8.1vw, 2.75rem);
+  }
+
+  .has-contact-film .visit-copy h2 {
+    margin-block: .44rem .72rem;
+  }
+
+  .has-contact-film .visit-copy .intro {
+    margin-block-end: .78rem;
+  }
+
+  .contact-film-camera {
+    mask-image: linear-gradient(180deg, transparent, #000 31%);
+  }
+
+  .contact-film::after {
+    background:
+      linear-gradient(180deg, #26151a 11%, #26151afa 24%, #26151a8f 42%, transparent 63%),
+      linear-gradient(0deg, #26151a57, transparent 19%);
+  }
+}
+
+@media (max-width: 47rem) and (max-height: 39rem) {
+  .has-contact-film .contact-stage > :is(.team, .visit) {
+    padding-block: 1rem;
+  }
+
+  .has-contact-film .contact-stage > .team {
+    padding-block-start: 2.5rem;
+  }
+
+  .has-contact-film .team-copy .section-title,
+  .has-contact-film .visit-copy .section-title {
+    font-size: clamp(2.55rem, 10.8vw, 3.3rem);
+  }
+
+  .has-contact-film .visit-copy .intro {
+    font-size: .9rem;
+    line-height: 1.4;
+  }
+
+  .has-contact-film .visit-copy h2 em {
+    display: inline;
+  }
+
+  .has-contact-film .visit-inner {
+    gap: .85rem;
+  }
+
+  .has-contact-film .visit-address {
+    padding: .72rem .9rem;
+    gap: .3rem;
+  }
+}

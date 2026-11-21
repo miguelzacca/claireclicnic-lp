@@ -8,6 +8,7 @@ Na pasta do projeto, execute `python producao/preview.py` e abra [a página inte
 
 - A página do filme reproduz a tomada de cinco segundos com os controles do navegador. [Assistir a Através do vidro](http://127.0.0.1:4173/cena.html).
 - A prancha reúne os marcos da cena em desktop e celular. [Ver os quadros](evidencias/quadros-claire.jpg).
+- A água clareia no fundo da Equipe e abre o agendamento. [Ir direto à passagem](http://127.0.0.1:4173/#passagem-da-gota) · [Assistir a Uma gota de luz](assets/video/uma-gota-de-luz.mp4).
 
 ## Através do vidro
 
@@ -26,12 +27,19 @@ Lenis suaviza a roda em desktop. Em telas de toque, a rolagem é nativa. A dist�
 
 Quando a mídia falha, o retrato e os cartões fazem a passagem em CSS. Em movimento reduzido, o retrato estático leva ao fluxo das especialidades. Com JavaScript desativado, as duas fichas ficam abertas. [Contrato de verificação](contrato-cena.json).
 
+## Uma gota de luz
+
+O filme ocupa o fundo da Equipe. A câmera se aproxima levemente no impacto e a própria luz da tomada clareia a água. O título, o botão do WhatsApp e o endereço aparecem sobre essa água clara. O último quadro fica no fundo do contato. Em telas estreitas, o ponto de impacto fica mais baixo para dar espaço aos nomes da equipe.
+
+O MP4 carrega na aproximação da cena, com 1,73 MB em desktop e 637 KB no recorte vertical. As duas versões usam H.264 a 24 fps, com quadros-chave a cada oito quadros. A posição de rolagem sincroniza filme, enquadramento e troca de conteúdo. Se a mídia falhar, entram os quadros extraídos da tomada. Em movimento reduzido, sem JavaScript ou quando o conteúdo pede mais altura que a tela, Equipe e Agendamento ficam em fluxo. [Direção e prompts](evidencias/gota/direcao.md) · [Quadros do navegador](evidencias/gota/quadros-navegador.jpg).
+
 ## Edição
 
 - [index.html](index.html) contém os textos, os dois caminhos de atendimento e os links comerciais.
 - [styles.css](styles.css) define a tipografia, as fichas, a equipe e o contato.
 - [cinema.css](cinema.css) define o palco e os enquadramentos.
 - [film.js](film.js) liga a rolagem ao vídeo e aos estados da abertura.
+- [contact-film.js](contact-film.js) liga a mesma rolagem à passagem para o agendamento. [video.js](video.js) compartilha a busca de quadros entre os dois filmes.
 - [script.js](script.js) liga a cena às abas e mantém os atalhos do menu.
 - [filme.glsl](producao/filme.glsl) contém a composição, a posição da câmera e a refração do filme. Para gerar os dois MP4 e o pôster novamente, execute `node producao/render-filme.mjs` com Playwright e FFmpeg disponíveis. O argumento `--prova <pasta>` gera quadros de estudo.
 

@@ -1,4 +1,5 @@
 import { mountFilm } from "./film.js";
+import { mountContactFilm } from "./contact-film.js";
 
 const menu = document.querySelector(".mobile-menu");
 const menuToggle = menu.querySelector("summary");
@@ -28,10 +29,11 @@ document.addEventListener("focusin", closeMenuOutside);
 for (const picture of document.querySelectorAll("main img")) {
   const showFallback = () => { picture.hidden = true; };
   picture.addEventListener("error", showFallback, { once: true });
-  if (picture.complete && !picture.naturalWidth) showFallback();
+  if (picture.hasAttribute("src") && picture.complete && !picture.naturalWidth) showFallback();
 }
 document.documentElement.classList.add("js-ready");
-mountFilm(document.querySelector("[data-film]"));
+const renderContactFilm = mountContactFilm(document.querySelector("[data-contact-film]"));
+mountFilm(document.querySelector("[data-film]"), renderContactFilm);
 
 const tabs = document.querySelector(".care-tabs");
 const controls = [...tabs.querySelectorAll("[data-care-tab]")];
