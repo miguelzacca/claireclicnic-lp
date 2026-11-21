@@ -6,9 +6,85 @@
   "destination": "https://wa.me/5547933883550",
   "next": "#especialidades",
   "marks": [
-    {"id":"00-abertura","position":0,"metrics":[{"selector":".hero:not(.film-intro) .hero-copy","property":"opacity","min":0.99},{"selector":".scene-choices","property":"opacity","max":0.01}]},
-    {"id":"35-dobra","position":0.35,"metrics":[{"selector":".film-stage","property":"--scene-angle","min":60,"max":78},{"selector":".scene-ink","property":"opacity","min":0.6,"max":0.85}]},
-    {"id":"70-escolha","position":0.70,"metrics":[{"selector":".scene-choice-title","property":"opacity","min":0.99},{"selector":".film-stage","property":"--scene-angle","max":0.1}]},
-    {"id":"100-saida","position":1,"metrics":[{"selector":".film-stage","property":"--landing-travel","max":1},{"selector":".scene-choices","property":"opacity","min":0.99}]}
+    {
+      "id": "00-abertura",
+      "position": 0,
+      "metrics": [
+        {
+          "selector": ".hero:not(.film-intro) .hero-copy",
+          "property": "opacity",
+          "min": 0.99
+        },
+        {
+          "selector": ".scene-movie",
+          "property": "opacity",
+          "max": 0.01
+        }
+      ]
+    },
+    {
+      "id": "35-refracao",
+      "position": 0.35,
+      "metrics": [
+        {
+          "selector": ".has-movie .scene-movie",
+          "property": "opacity",
+          "min": 0.99
+        },
+        {
+          "selector": ".scene-card",
+          "property": "opacity",
+          "max": 0.01
+        }
+      ]
+    },
+    {
+      "id": "60-revelacao",
+      "position": 0.6,
+      "metrics": [
+        {
+          "selector": ".has-movie .scene-movie",
+          "property": "opacity",
+          "min": 0.99
+        },
+        {
+          "selector": ".scene-card",
+          "property": "opacity",
+          "max": 0.01
+        }
+      ]
+    },
+    {
+      "id": "85-escolha",
+      "position": 0.85,
+      "metrics": [
+        {
+          "selector": ".scene-choice-title",
+          "property": "opacity",
+          "min": 0.99
+        },
+        {
+          "selector": ".scene-choices:not([inert]) .scene-card",
+          "property": "opacity",
+          "min": 0.99
+        }
+      ]
+    },
+    {
+      "id": "100-saida",
+      "position": 1,
+      "metrics": [
+        {
+          "selector": ".film-stage",
+          "property": "--landing-travel",
+          "max": 1
+        },
+        {
+          "selector": ".scene-movie",
+          "property": "opacity",
+          "max": 0.01
+        }
+      ]
+    }
   ]
 }

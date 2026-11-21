@@ -3,7 +3,7 @@
   --scene-ink: #2b171d;
   --scene-ivory: #fff3e5;
   --scene-frame: max(33rem, calc(100svh - var(--header-height)));
-  --scene-span: clamp(39rem, 91svh, 57rem);
+  --scene-span: clamp(48rem, 126svh, 79rem);
   --scene-arch: 48% 48% .48rem .48rem / 21% 21% .48rem .48rem;
   color: #2c181b;
   background: var(--scene-paper);
@@ -31,7 +31,7 @@
 .scene-ink {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 49% 44%, #502b33, #2b171d 74%);
+  background: radial-gradient(ellipse at 48% 48%, #502932, #241218 79%);
   opacity: var(--ink-fade, 0);
   pointer-events: none;
 }
@@ -73,6 +73,10 @@
   object-position: 53% 43%;
 }
 
+.has-movie .scene-portrait {
+  transform: none;
+}
+
 .scene-portrait::after {
   position: absolute;
   inset: 74% 0 0;
@@ -91,6 +95,33 @@
   font-weight: 550;
 }
 
+.scene-movie {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scene-movie video {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.scene-movie::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(#241218 0%, transparent 24%);
+  opacity: var(--movie-label, 0);
+  content: "";
+}
+
+.has-movie .scene-movie {
+  opacity: var(--movie-alpha, 0);
+}
+
 .scene-glass {
   position: absolute;
   z-index: 4;
@@ -99,6 +130,10 @@
   inline-size: clamp(11rem, 23.5vw, 27rem);
   opacity: var(--glass-opacity, 1);
   pointer-events: none;
+}
+
+.has-movie .scene-glass {
+  opacity: var(--movie-glass-opacity, 1);
 }
 
 .scene-glass img {
@@ -183,14 +218,24 @@
 .is-directed .scene-choices {
   position: absolute;
   z-index: 3;
-  inset-block: clamp(2.3rem, 7svh, 5.5rem) clamp(3.6rem, 11svh, 6.5rem);
+  inset-block: 7% 12.1%;
   inset-inline: 0;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-  gap: clamp(.75rem, 2.6svh, 1.7rem);
+  grid-template-rows: minmax(0, 1fr) minmax(0, 4.86fr);
   color: var(--scene-ivory);
   transform: var(--deck-transform, none);
   opacity: var(--cards-opacity, 0);
+}
+
+.has-movie .scene-choices {
+  --choice-label: var(--movie-label, 0);
+  --choice-lift: var(--movie-lift, 0);
+  opacity: 1;
+}
+
+.has-movie .scene-card {
+  opacity: var(--movie-cards, 0);
+  transform: none;
 }
 
 .scene-choices[inert] {
@@ -198,7 +243,7 @@
 }
 
 .scene-choice-title {
-  font-size: clamp(3.4rem, 6.15vw, 7.3rem);
+  font-size: clamp(2.55rem, min(6.15vw, 10.9svh), 7.3rem);
   line-height: .93;
   transform: translateY(var(--choice-lift, 1.5rem));
   opacity: var(--choice-label, 0);
@@ -208,7 +253,7 @@
   --fold-angle: var(--scene-angle, 79deg);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(.7rem, 2.05vw, 2rem);
+  gap: 2.24%;
   perspective: 1100px;
 }
 
@@ -352,19 +397,19 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .film-intro .scene-portrait img {
-    animation: portrait-print 1.3s cubic-bezier(.63, .05, .19, 1) backwards;
+    animation: portrait-print .95s cubic-bezier(.63, .05, .19, 1) backwards;
   }
 
   .film-intro .scene-glass img {
-    animation: glass-enter 1.5s cubic-bezier(.2, .7, .22, 1) backwards;
+    animation: glass-enter 1.06s cubic-bezier(.2, .7, .22, 1) backwards;
   }
 
   .film-intro .film-title-mask > * {
-    animation: lift-title 1s cubic-bezier(.16, .73, .26, 1) .08s backwards;
+    animation: lift-title .78s cubic-bezier(.16, .73, .26, 1) .045s backwards;
   }
 
   .film-intro .film-title-mask:nth-child(2) > * {
-    animation-delay: .24s;
+    animation-delay: .16s;
   }
 
   .film-intro .hero-copy:has(:focus-visible) .film-title-mask > * {
@@ -404,7 +449,7 @@
 @media (max-width: 47rem) {
   .hero {
     --scene-frame: max(30.5rem, calc(100svh - var(--header-height)));
-    --scene-span: clamp(25rem, 65svh, 39rem);
+    --scene-span: clamp(28rem, 82svh, 45rem);
     --scene-arch: 48% 48% .36rem .36rem / 23% 23% .36rem .36rem;
   }
 
@@ -483,22 +528,22 @@
   }
 
   .is-directed .scene-choices {
-    inset-block: clamp(1.15rem, 4svh, 2.35rem) clamp(1.9rem, 5.8svh, 3.25rem);
-    gap: .9rem;
+    inset-block: 3.5% 5.5%;
+    grid-template-rows: minmax(0, 1fr) minmax(0, 8.9fr);
   }
 
   .scene-choice-title {
-    font-size: clamp(2.5rem, 12vw, 5.3rem);
+    font-size: clamp(2.25rem, min(11vw, 9svh), 5.3rem);
   }
 
   .scene-cards {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: repeat(2, minmax(0, 1fr));
-    gap: .72rem;
+    gap: 1.83%;
   }
 
   .scene-card {
-    border-radius: 2.4rem .45rem .45rem .45rem;
+    border-radius: 45% 45% .45rem .45rem / 19% 19% .45rem .45rem;
   }
 
   .scene-card--skin {
