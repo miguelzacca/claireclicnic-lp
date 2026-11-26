@@ -51,6 +51,7 @@ A prévia usa `noindex`. Em uma publicação, configure a URL canônica e a URL 
 - O agendamento leva ao [WhatsApp comercial da Clairé Clinic](https://wa.me/5547933883550).
 - Os atendimentos e as profissionais estão documentados na [cobertura da inauguração](https://www.vipsocial.com.br/noticia/claire-clinic-inaugura-em-itapema-com-proposta-integrada-de-estetica-facial-e-nutricao-saiba-detalhes/59066) e no [cadastro empresarial](https://www.empresasdobrasil.com.br/empresa/66854247000183-claire-clinic-ltda).
 - Perfil oficial informado no pedido. [Instagram da Clairé Clinic](https://www.instagram.com/claireclinic_/).
+- A galeria editorial usa quatro publicações selecionadas no perfil público. As capas ilustrativas são arquivos locais do projeto. O conteúdo original carrega pelo embed do Instagram ao abrir um cartão, com link direto disponível no diálogo. [Perfil facial](https://www.instagram.com/p/DfpfLznIGxK/) · [Histamina](https://www.instagram.com/reel/DfZ-2QnP0O_/) · [Alimentação no verão](https://www.instagram.com/p/DfNpeekoCFq/) · [Constância](https://www.instagram.com/p/DecuVnXmXUt/).
 - Licenças acompanhadas no projeto. [DM Sans](assets/fonts/OFL-DM-Sans.txt), [Instrument Serif](assets/fonts/OFL-Instrument-Serif.txt) e [Lenis 1.3.27](assets/vendor/LICENSE-Lenis.txt).
 
 ImageGen produziu o retrato de campanha, o recorte de vidro, as fotos conceituais da pele e da mesa e o prisma da seção de equipe. As imagens do site são ilustrativas. [Ativos WebP e cartão social](assets/images).

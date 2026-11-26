@@ -96,6 +96,31 @@ selectFromHash();
 selectCare(activeCare || panels[0].id);
 tabs.hidden = false;
 
+const journal = document.querySelector("[data-journal]");
+const journalDialog = document.querySelector("[data-journal-dialog]");
+const journalTitle = journalDialog.querySelector("h2");
+const journalSource = journalDialog.querySelector("[data-journal-source]");
+const journalEmbed = journalDialog.querySelector("[data-journal-embed]");
+
+journal.addEventListener("click", (event) => {
+  const link = event.target.closest(".journal-link");
+  if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  if (typeof journalDialog.showModal !== "function") return;
+
+  event.preventDefault();
+  const title = link.querySelector("h3").textContent;
+  journalTitle.textContent = title;
+  journalSource.href = link.href;
+  journalDialog.showModal();
+
+  const frame = document.createElement("iframe");
+  frame.title = title + " no Instagram";
+  frame.src = link.href + "embed/";
+  journalEmbed.replaceChildren(frame);
+});
+
+journalDialog.addEventListener("close", () => journalEmbed.replaceChildren());
+
 if (typeof IntersectionObserver === "function") {
   const observer = new IntersectionObserver((entries) => {
     for (const entry of entries) {
